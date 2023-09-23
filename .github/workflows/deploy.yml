@@ -3,7 +3,7 @@ on: push
 
 jobs:
   lint:
-    runs-on: ubuntu:latest
+    runs-on: ubuntu-latest
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -13,8 +13,12 @@ jobs:
         run: npm run lint
   test_build:
     needs: lint
-    runs-on: ubuntu:latest
+    runs-on: ubuntu-latest
     steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: install dependencies
+        run: npm ci
       - name: test and build
         run: |
           npm test
